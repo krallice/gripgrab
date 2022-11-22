@@ -32,6 +32,8 @@ def do_main():
                 if (int(gripper['value'].split()[0]) > searchrange['LOWERBOUND'] and int(gripper['value'].split()[0]) < searchrange['UPPERBOUND']):
                     print(gripper['value'])
 
+        print('---')
+
         time.sleep(10)
 
 if __name__ == '__main__':
