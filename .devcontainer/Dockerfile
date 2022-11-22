@@ -8,8 +8,7 @@ ARG NODE_VERSION="lts/*"
 RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
 
 ## Install OpenVPN:
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update \
-&& apt-get -y install --no-install-recommends openvpn \
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY src/requirements.txt /tmp/pip-tmp/
