@@ -11,7 +11,7 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/l
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
 
 # Install tshooting tools:
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim resolvconf
 
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY src/requirements.txt /tmp/pip-tmp/
