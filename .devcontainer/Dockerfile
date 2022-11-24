@@ -10,6 +10,9 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/l
 ## Install OpenVPN:
 RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
 
+# Install tshooting tools:
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
+
 # [Optional] If your pip requirements rarely change, uncomment this section to add them to the image.
 # COPY src/requirements.txt /tmp/pip-tmp/
 # RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt       #    && rm -rf /tmp/pip-tmp
