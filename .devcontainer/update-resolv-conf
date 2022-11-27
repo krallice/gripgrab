@@ -1,19 +1,12 @@
 #!/bin/bash
 # 
-# Parses DHCP options from openvpn to update resolv.conf
-# To use set as 'up' and 'down' script in your openvpn *.conf:
-# up /etc/openvpn/update-resolv-conf
-# down /etc/openvpn/update-resolv-conf
+# Author: Stephen Rozanc
+# Modified update-resolv-conf script that the OpenVPN daemon calls upon Tunnel UP and Tunnel DOWN status changes.
 #
-# Used snippets of resolvconf script by Thomas Hood and Chris Hanson.
-# Licensed under the GNU GPL.  See /usr/share/common-licenses/GPL. 
-# 
-# Example envs set from openvpn:
-#
-#     foreign_option_1='dhcp-option DNS 193.43.27.132'
-#     foreign_option_2='dhcp-option DNS 193.43.27.133'
-#     foreign_option_3='dhcp-option DOMAIN be.bnc.ch'
-#
+# On Tunnel UP: it writes the DNS Server advertised over the VPN to /etc/resolv.conf
+# On Tunnel DOWN: it writes DEFAULT_NAMESERVER back to /etc/resolv.conf
+
+DEFAULT_NAMESERVER="8.8.8.8"
 
 [ "$script_type" ] || exit 0
 [ "$dev" ] || exit 0
@@ -52,6 +45,6 @@ case "$script_type" in
         echo -n "$R" > /etc/resolv.conf
         ;;
   down)
-        echo "nameserver 8.8.8.8" > /etc/resolv.conf
+        echo "nameserver ${DEFAULT_NAMESERVER}" > /etc/resolv.conf
         ;;
 esac
