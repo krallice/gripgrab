@@ -5,9 +5,12 @@
 # Example dockerfile structure that worked for me on a Python Project
 # Unloan will likely be using a node based image. As long as it's debian based, it should not be an issue.
 
-# [Choice] Python version: 3, 3.9, 3.8, 3.7, 3.6
-ARG VARIANT="3"
-FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+# # [Choice] Python version: 3, 3.9, 3.8, 3.7, 3.6
+# ARG VARIANT="3"
+# FROM mcr.microsoft.com/vscode/devcontainers/python:0-${VARIANT}
+
+# Note: You can use any Debian/Ubuntu based image you want. 
+FROM mcr.microsoft.com/vscode/devcontainers/base:buster
 
 # [Option] Install zsh
 ARG INSTALL_ZSH="true"
@@ -42,13 +45,14 @@ VOLUME [ "/var/lib/docker" ]
 # inside the container "overrideCommand": false is set in devcontainer.json. 
 # The script will also execute CMD if you need to alter startup behaviors.
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
+CMD [ "sleep", "infinity" ]
 
-# Required: Install OpenVPN:
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
+# # Required: Install OpenVPN:
+# RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
 
-# Required: Install custom update-resolv-conf
-COPY .devcontainer/update-resolv-conf /etc/openvpn/update-resolv-conf
-RUN chmod +x /etc/openvpn/update-resolv-conf
+# # Required: Install custom update-resolv-conf
+# COPY .devcontainer/update-resolv-conf /etc/openvpn/update-resolv-conf
+# RUN chmod +x /etc/openvpn/update-resolv-conf
 
-# Recommended: Install troubleshooting tools:
-RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
+# # Recommended: Install troubleshooting tools:
+# RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
