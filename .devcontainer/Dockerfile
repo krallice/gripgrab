@@ -47,12 +47,12 @@ VOLUME [ "/var/lib/docker" ]
 ENTRYPOINT [ "/usr/local/share/docker-init.sh" ]
 CMD [ "sleep", "infinity" ]
 
-# # Required: Install OpenVPN:
-# RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
+# Required: Install OpenVPN:
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get -y install --no-install-recommends openvpn
 
-# # Required: Install custom update-resolv-conf
-# COPY .devcontainer/update-resolv-conf /etc/openvpn/update-resolv-conf
-# RUN chmod +x /etc/openvpn/update-resolv-conf
+# Required: Install custom update-resolv-conf
+COPY .devcontainer/update-resolv-conf /etc/openvpn/update-resolv-conf
+RUN chmod +x /etc/openvpn/update-resolv-conf
 
-# # Recommended: Install troubleshooting tools:
-# RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
+# Recommended: Install troubleshooting tools:
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install --no-install-recommends dnsutils iputils-ping vim
