@@ -10,11 +10,7 @@
 	},
 
 	// Required: Allow the container to interact with host networking
-	"runArgs": ["--init", "--privileged", "--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun"],
-
-	"overrideCommand": false,
-
-	"mounts": ["source=dind-var-lib-docker,target=/var/lib/docker,type=volume"],
+	"runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun"],
 
 	"postStartCommand": "bash ./.devcontainer/postcreate/install-dev-tools.sh"
 }
